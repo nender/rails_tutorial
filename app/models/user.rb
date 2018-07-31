@@ -48,6 +48,10 @@ class User < ApplicationRecord
       UserMailer.account_activation(self).deliver_now
     end
 
+    def feed
+      Micropost.where("user_id = ?", id)
+    end
+
   private
     def downcase_email
       self.email.downcase!
